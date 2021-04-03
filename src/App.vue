@@ -2,7 +2,9 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/authdemo">AuthDemo</router-link>
     </div>
     <router-view/>
   </div>
@@ -28,5 +30,20 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+#nprogress {
+	pointer-events: none;
+
+	.bar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 99999;
+		width: 100%;
+		height: 2px;
+		//background-color: @primary-color;
+		opacity: 0.75;
+	}
 }
 </style>
