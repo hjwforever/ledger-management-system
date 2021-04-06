@@ -9,28 +9,32 @@ const config = {
   baseURL: process.env.VUE_APP_BASE_URL,
   timeout: 10000,
   headers: {
-    'X-LC-Id': process.env.VUE_APP_appId,
-    'X-LC-Key': process.env.VUE_APP_appKey,
+    // 'X-LC-Id': process.env.VUE_APP_appId,
+    // 'X-LC-Key': process.env.VUE_APP_appKey,
     'Content-Type': 'application/json;charset=utf-8',
-    'X-Requested-With':'XMLHttpRequest',
+    // 'X-Requested-With':'XMLHttpRequest',
   }
 }
 const instance = axios.create(config)
+instance.defaults.withCredentials = true
 
 instance.interceptors.request.use((config) => {
+  // console.log('request config:', config)
   // setAuth("test");
   // config.url += '?date=' + new Date().getTime()
   // if (config.url.indexOf("login") === -1 && config.url.indexOf("register") === -1) {
   //   // console.log('session', sessionStorage.getItem(getKey()))
   //   console.log('auth',getAuth())
-  //   config.headers['token'] = getAuth()
+  //   config.headers['lmssessionid'] = getAuth()
   // }
+  // config.headers['lmssessionid'] = getAuth()
   return config
 }, function (error) {
   return Promise.reject(error)
 })
 
 instance.interceptors.response.use(res => {
+  // console.log('in interceptor, response: ', res);
   if (typeof res.data !== 'object') {
     Message.error('服务端异常！');
     return Promise.reject(res)
@@ -40,14 +44,14 @@ instance.interceptors.response.use(res => {
     if (res.data.resultCode === 416) {
       // 返回 416 代表没有登录状态，路由跳转到/login 页面（目前还为创建组件），这里的 window.vRouter 是在
       // main.js 里面设置好的 window.vRouter = router
-      window.router.push({path: '/login'}).then(() => {
+      window.router.push({name: '/login'}).then(() => {
         Message.error('请先登录！');
         console.log("请先登录");
       })
     }
     return Promise.reject(res.data)
   }
-
+  console.log(res)
   return res.data
 })
 

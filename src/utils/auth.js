@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 
-const key = 'ledger_management_system_session'
+const key = "lmssessionid" //'ledger_management_system_session'
 
 export function  getKey() {
   return key;

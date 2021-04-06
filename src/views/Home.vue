@@ -92,6 +92,7 @@ export default {
       this.$message.success(dateUtil.buildRandomDate(2021))
     },
     test2 () {
+	    let _user_name = this.user.name;
       getDemo()
         .then(res => {
           this.user = res.data.results[0]
@@ -99,10 +100,16 @@ export default {
         .catch(err => {
 	        this.user = err.results[0]
         })
-	      .finally(console.log(this.user))
+	      .finally(()=>{
+		      console.log(this.user);
+		      if(_user_name !== this.user.name) {
+		      	this.$message.success("切换人物成功")
+		      }
+	      })
 
     },
     getRandomAvatar () {
+	    let _user_name = this.user.name;
       getAvatar()
         .then(res => {
           this.user.picture.medium = res.data.imgurl
@@ -115,6 +122,11 @@ export default {
         .catch(err => {
           console.log(err)
         })
+	    .finally(() => {
+	    	if(_user_name !== this.user.name) {
+	    		this.$message.success("切换头像成功")
+		    }
+	    })
     }
   }
 }

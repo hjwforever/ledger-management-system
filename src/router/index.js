@@ -14,22 +14,22 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home,
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'about',
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: Login,
   },
   {
     path: '/authdemo',
-    name: 'AuthDemo',
+    name: 'authDemo',
     component: AuthDemo,
     meta : {
       requireAuth: true
@@ -46,7 +46,7 @@ const router = new VueRouter({
 
 let loading =Loading.service();
 router.beforeEach((to, from, next) => {
-  console.log(to.path,from.path)
+  // console.log(to.path,from.path)
   //
   // if (to.path !== from.path) {
   //   loading = Loading.service({
@@ -62,7 +62,7 @@ router.beforeEach((to, from, next) => {
 
   if (to.meta.requireAuth) {
     document.title = to.meta.title || '';
-    const user = JSON.parse(sessionStorage.getItem('lms_user'));
+    const user = JSON.parse(sessionStorage.getItem('lmssessionid'));
     if (!user && to.path !== '/login') {
       next('/login');
     } else if (to.meta.permission) {

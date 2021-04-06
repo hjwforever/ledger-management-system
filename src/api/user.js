@@ -1,23 +1,33 @@
 import request from '@/utils/request'
-import axios from 'axios';
+import _request from 'axios';
 
 // 登录方法
-export function login () {
-  const data = {
-    username: 'admin',
-    password: '123456'
+export function login (loginForm) {
+  if (loginForm == null || loginForm =={}) {
+    loginForm = {
+      username: 'test',
+      password: '123456'
+    }
   }
   return request({
-    url: '/auth/login',
+    url: '/user/login',
     method: 'post',
-    data: data
+    data: loginForm
+  })
+}
+
+// 获取用户信息
+export function userInfo () {
+  return request({
+    url: '/user/info',
+    method: 'get'
   })
 }
 
 export function getDemo() {
-  return request.get('/');
+  return _request.get(process.env.VUE_APP_USER_URL);
 }
 
 export function getAvatar() {
-  return axios.get('https://api.uomg.com/api/rand.avatar?format=json');
+  return _request.get('https://api.uomg.com/api/rand.avatar?format=json');
 }
