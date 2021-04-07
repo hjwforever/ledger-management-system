@@ -33,8 +33,6 @@ import {setAuth,getAuth} from '../../../utils/auth'
 
 export default {
   name: 'Login',
-  components: {
-  },
   data() {
 	  return {
 		  loginFrom: {
@@ -58,7 +56,7 @@ export default {
   methods: {
   	login() {
 		  login(this.loginFrom)
-				  .then((response) => {
+			  .then((response) => {
 				  	console.log(response)
 				    console.log(JSON.stringify(response.data));
 				    this.$message.success(response.data.msg.toString()+"\n欢迎你,"+response.data.userName.toString());

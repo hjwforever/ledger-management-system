@@ -9,10 +9,7 @@ const config = {
   baseURL: process.env.VUE_APP_BASE_URL,
   timeout: 10000,
   headers: {
-    // 'X-LC-Id': process.env.VUE_APP_appId,
-    // 'X-LC-Key': process.env.VUE_APP_appKey,
     'Content-Type': 'application/json;charset=utf-8',
-    // 'X-Requested-With':'XMLHttpRequest',
   }
 }
 const instance = axios.create(config)
